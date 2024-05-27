@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchVehicleMakes } from "../../api";
-import { VehicleMake } from "../Vehicle/types";
+import { IVehicleMakeType } from "../Vehicle/types";
 
 export const useVehicleMakes = (year: string) => {
-  const { data, status } = useQuery<VehicleMake[]>({
+  const { data, status } = useQuery<IVehicleMakeType[]>({
     queryKey: ["vehicleMakes", year],
     queryFn: () => fetchVehicleMakes(year),
     enabled: !!year,

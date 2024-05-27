@@ -1,43 +1,11 @@
 import Select from "../../Select/Select";
 import { VehicleSelectBarStyled } from "./style";
-import { getYearOptions } from "../../../utils";
+import { getYearOptions, processVehicleData } from "../../../utils";
 import { useState } from "react";
 import { useVehicleMakes } from "../../hooks/useVehicleMakes";
-import { IVehicleModelType, VehicleMake } from "../../Vehicle/types";
+import { IVehicleModelType } from "../../Vehicle/types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchVehicleModels } from "../../../api";
-
-const processVehicleMakes = (data: VehicleMake[] | undefined) => {
-  return (
-    data
-      ?.sort((a, b) => a.MakeName.localeCompare(b.MakeName))
-      .reduce((acc: VehicleMake[], current: VehicleMake) => {
-        const x = acc.find((item) => item.MakeId === current.MakeId);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, [])
-      .map((opt) => ({ id: opt.MakeId, name: opt.MakeName })) || []
-  );
-};
-
-const processVehicleModels = (data: IVehicleModelType[] | undefined) => {
-  return (
-    data
-      ?.sort((a, b) => a.Model_Name.localeCompare(b.Model_Name))
-      ?.reduce((acc: IVehicleModelType[], current: IVehicleModelType) => {
-        const x = acc.find((item) => item.Model_ID === current.Model_ID);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, [])
-      .map((opt) => ({ id: opt.Model_ID, name: opt.Model_Name })) || []
-  );
-};
 
 const VehicleSelectBar = () => {
   const [year, setYear] = useState("");
@@ -46,7 +14,11 @@ const VehicleSelectBar = () => {
   const [engine, setEngine] = useState("");
 
   const { data, status } = useVehicleMakes(year);
-  const vehicleMakes = processVehicleMakes(data);
+  const vehicleMakes = processVehicleData(
+    data,
+    (item) => item.MakeId,
+    (item) => item.MakeName
+  );
 
   const { data: vehicleModels, status: modelStatus } = useQuery<
     IVehicleModelType[]
@@ -55,9 +27,11 @@ const VehicleSelectBar = () => {
     queryFn: () => fetchVehicleModels(make),
     enabled: !!make,
   });
-  const models = processVehicleModels(vehicleModels);
-
-  console.log("\n\n***\n vehicleModels: ", vehicleModels, "\n***\n");
+  const models = processVehicleData(
+    vehicleModels,
+    (item) => item.Model_ID,
+    (item) => item.Model_Name
+  );
 
   return (
     <VehicleSelectBarStyled>

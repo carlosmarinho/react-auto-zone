@@ -1,4 +1,4 @@
-export interface VehicleMake {
+export interface IVehicleMakeType {
   MakeId: number;
   MakeName: string;
   MrfId: number;

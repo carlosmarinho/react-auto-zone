@@ -1,7 +1,7 @@
 import { StyledSelect } from "./style";
-import { StyledSelectProps } from "./types";
+import { IStyledSelectProps } from "./types";
 
-const Select: React.FC<StyledSelectProps> = ({
+const Select: React.FC<IStyledSelectProps> = ({
   active = false,
   placeholder = "Select an option",
   options = [],
