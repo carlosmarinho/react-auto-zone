@@ -11,7 +11,7 @@ describe("Select", () => {
 
   const onChange = jest.fn();
 
-  beforeEach(() => {
+  const renderSelect = () => {
     render(
       <Select
         ariaLabel="test select"
@@ -22,19 +22,10 @@ describe("Select", () => {
         onChange={onChange}
       />
     );
-  });
+  };
 
   it("renders the correct options", () => {
-    render(
-      <Select
-        ariaLabel="test select"
-        active={true}
-        placeholder="Select an option"
-        options={options}
-        value={options[0].name}
-        onChange={onChange}
-      />
-    );
+    renderSelect();
 
     options.forEach((option) => {
       expect(screen.getByText(option.name)).toBeInTheDocument();
@@ -42,16 +33,7 @@ describe("Select", () => {
   });
 
   it("calls onChange when an option is selected", () => {
-    render(
-      <Select
-        ariaLabel="test select"
-        active={true}
-        placeholder="Select an option"
-        options={options}
-        value={options[0].name}
-        onChange={onChange}
-      />
-    );
+    renderSelect();
 
     userEvent.selectOptions(screen.getByLabelText("test select"), [
       options[1].name,
