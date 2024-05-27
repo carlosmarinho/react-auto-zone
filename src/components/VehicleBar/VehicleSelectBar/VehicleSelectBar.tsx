@@ -1,9 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
 import Select from "../../Select/Select";
 import { VehicleSelectBarStyled } from "./style";
 import { getYearOptions } from "../../../utils";
-import { fetchVehicleMakes } from "../../../api";
 import { useState } from "react";
+import { useVehicleMakes } from "../../hooks/useVehicleMakes";
+import { VehicleMake } from "../../Vehicle/types";
+
+const processVehicleMakes = (data: VehicleMake[] | undefined) => {
+  return (
+    data
+      ?.sort((a, b) => a.MakeName.localeCompare(b.MakeName))
+      .reduce((acc: VehicleMake[], current: VehicleMake) => {
+        const x = acc.find((item) => item.MakeId === current.MakeId);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, [])
+      .map((opt) => ({ id: opt.MakeId, name: opt.MakeName })) || []
+  );
+};
 
 const VehicleSelectBar = () => {
   const [year, setYear] = useState("");
@@ -11,10 +27,8 @@ const VehicleSelectBar = () => {
   const [model, setModel] = useState("");
   const [engine, setEngine] = useState("");
 
-  const { data, status } = useQuery<VehicleMake[]>({
-    queryKey: ["vehicleMakes"],
-    queryFn: fetchVehicleMakes,
-  });
+  const { data, status } = useVehicleMakes(year);
+  const vehicleMakes = processVehicleMakes(data);
 
   return (
     <VehicleSelectBarStyled>
@@ -26,12 +40,9 @@ const VehicleSelectBar = () => {
         onChange={(e) => setYear(e.target.value)}
       />
       <Select
+        active={year !== ""}
         placeholder="2 | Make"
-        options={
-          status === "success"
-            ? data.map((opt) => ({ id: opt.Make_ID, name: opt.Make_Name }))
-            : []
-        }
+        options={status === "success" ? vehicleMakes : []}
         value={make}
         onChange={(e) => setMake(e.target.value)}
       />

@@ -1,4 +1,6 @@
-interface VehicleMake {
-  Make_ID: number;
-  Make_Name: string;
+export interface VehicleMake {
+  MakeId: number;
+  MakeName: string;
+  MrfId: number;
+  MfrName: string;
 }
