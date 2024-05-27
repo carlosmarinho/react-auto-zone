@@ -5,9 +5,9 @@ import { LoginIconArea, StyledHeader } from "./style";
 const Header = () => {
   return (
     <StyledHeader>
-      <img src={Logo} alt="Logo" />
+      <img src={Logo} alt="Autozone Company Logo" />
       <LoginIconArea>
-        <img src={SignIn} alt="User Login" />
+        <img src={SignIn} alt="User Login Icon" />
         <span>Sign IN</span>
       </LoginIconArea>
     </StyledHeader>

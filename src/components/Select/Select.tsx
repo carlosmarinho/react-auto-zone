@@ -2,6 +2,7 @@ import { StyledSelect } from "./style";
 import { IStyledSelectProps } from "./types";
 
 const Select: React.FC<IStyledSelectProps> = ({
+  ariaLabel,
   active = false,
   placeholder = "Select an option",
   options = [],
@@ -9,7 +10,12 @@ const Select: React.FC<IStyledSelectProps> = ({
   onChange,
 }) => {
   return (
-    <StyledSelect activeSel={active} value={value || ""} onChange={onChange}>
+    <StyledSelect
+      aria-label={ariaLabel}
+      activeSel={active}
+      value={value || ""}
+      onChange={onChange}
+    >
       <option value="" disabled>
         {placeholder}
       </option>
