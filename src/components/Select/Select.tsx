@@ -1,19 +1,7 @@
 import { StyledSelect } from "./style";
+import { StyledSelectProps } from "./types";
 
-interface OptionObject {
-  name: string;
-  id: string | number;
-}
-
-interface SelectProps {
-  active?: boolean;
-  placeholder?: string;
-  options?: number[] | string[] | OptionObject[];
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-const Select: React.FC<SelectProps> = ({
+const Select: React.FC<StyledSelectProps> = ({
   active = false,
   placeholder = "Select an option",
   options = [],
