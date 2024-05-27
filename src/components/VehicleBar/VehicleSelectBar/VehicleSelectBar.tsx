@@ -47,11 +47,13 @@ const VehicleSelectBar = () => {
         onChange={(e) => setMake(e.target.value)}
       />
       <Select
+        active={make !== ""}
         placeholder="3 | Model"
         value={model}
         onChange={(e) => setModel(e.target.value)}
       />
       <Select
+        active={model !== ""}
         placeholder="4 | Engine"
         value={engine}
         onChange={(e) => setEngine(e.target.value)}

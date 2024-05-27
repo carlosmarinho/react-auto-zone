@@ -17,12 +17,12 @@ const Select: React.FC<SelectProps> = ({
   active = false,
   placeholder = "Select an option",
   options = [],
-  value = null,
+  value = "",
   onChange,
 }) => {
   return (
-    <StyledSelect active={active} value={value || ""} onChange={onChange}>
-      <option value="" disabled selected>
+    <StyledSelect activeSel={active} value={value || ""} onChange={onChange}>
+      <option value="" disabled>
         {placeholder}
       </option>
       {options.map((option, index) => {

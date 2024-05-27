@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
-export const StyledSelect = styled.select<{ active?: boolean }>`
+type SelectProps = {
+  activeSel?: boolean;
+  [key: string]: unknown;
+};
+
+export const StyledSelect = styled(({ activeSel, ...props }: SelectProps) => (
+  <select {...props} />
+))<SelectProps>`
   padding: 8px;
   font-size: 16px;
   border: 1px solid #000;
   border-bottom: ${(props) =>
-    props.active ? "2px solid #f26100" : "1px solid #000"};
-  border-bottom-color: ${(props) => (props.active ? "#f26100" : "#000")};
+    props.activeSel ? "2px solid #f26100" : "1px solid #000"};
   border-radius: 5px;
-  background-color: ${(props) => (props.active ? "#fff" : "#f2f2f2")};
-  color: ${(props) => (props.active ? "#333" : "#bbb")};
+  background-color: ${(props) => (props.activeSel ? "#fff" : "#f2f2f2")};
+  color: ${(props) => (props.activeSel ? "#333" : "#bbb")};
   margin-bottom: 10px;
   width: 90%;
   height: 50px;
