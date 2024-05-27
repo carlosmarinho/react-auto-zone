@@ -1,20 +1,13 @@
-import { VehicleSelect, VehicleSelectBarStyled } from "./style";
+import Select from "../../Select/Select";
+import { VehicleSelectBarStyled } from "./style";
 
 const VehicleSelectBar = () => {
   return (
     <VehicleSelectBarStyled>
-      <VehicleSelect active>
-        <option>Select your vehicle</option>
-      </VehicleSelect>
-      <VehicleSelect>
-        <option>Select your vehicle</option>
-      </VehicleSelect>
-      <VehicleSelect>
-        <option>Select your vehicle</option>
-      </VehicleSelect>
-      <VehicleSelect>
-        <option>Select your vehicle</option>
-      </VehicleSelect>
+      <Select active={true} />
+      <Select />
+      <Select />
+      <Select />
     </VehicleSelectBarStyled>
   );
 };
