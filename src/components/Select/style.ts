@@ -7,7 +7,7 @@ export const StyledSelect = styled.select<{ active?: boolean }>`
   border-bottom-color: ${(props) => (props.active ? "#f26100" : "#000")};
   border-radius: 5px;
   background-color: ${(props) => (props.active ? "#fff" : "#f2f2f2")};
-  color: #333;
+  color: ${(props) => (props.active ? "#333" : "#bbb")};
   margin-bottom: 10px;
   width: 90%;
   height: 50px;

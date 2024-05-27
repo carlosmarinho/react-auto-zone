@@ -2,12 +2,18 @@ import { StyledSelect } from "./style";
 
 interface SelectProps {
   active?: boolean;
+  placeholder?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ active = false }) => {
+const Select: React.FC<SelectProps> = ({
+  active = false,
+  placeholder = "Select an option",
+}) => {
   return (
     <StyledSelect active={active}>
-      <option>Select your vehicle</option>
+      <option value="" disabled selected>
+        {placeholder}
+      </option>
     </StyledSelect>
   );
 };
