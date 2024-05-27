@@ -75,11 +75,11 @@ const VehicleSelect = styled.select<{ active?: boolean }>`
   @media (min-width: 768px) {
     margin-right: 20px;
     margin-bottom: initial;
-    width: 20%;
+    width: 24%;
   }
 
   @media (min-width: 1024px) {
-    width: 18%;
+    width: 23%;
   }
 `;
 
