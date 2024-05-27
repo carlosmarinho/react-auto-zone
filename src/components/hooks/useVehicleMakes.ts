@@ -3,11 +3,17 @@ import { fetchVehicleMakes } from "../../api";
 import { IVehicleMakeType } from "../Vehicle/types";
 
 export const useVehicleMakes = (year: string) => {
-  const { data, status } = useQuery<IVehicleMakeType[]>({
+  const { data: vehicleMakes, status } = useQuery<IVehicleMakeType[]>({
     queryKey: ["vehicleMakes", year],
     queryFn: () => fetchVehicleMakes(year),
     enabled: !!year,
   });
 
-  return { data, status };
+  const makes =
+    vehicleMakes
+      ?.map((item) => ({ id: item.MakeId, name: item.MakeName }))
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i) || [];
+
+  return { makes, status };
 };

@@ -1,11 +1,9 @@
 import Select from "../../Select/Select";
 import { VehicleSelectBarStyled } from "./style";
-import { getYearOptions, processVehicleData } from "../../../utils";
+import { getYearOptions } from "../../../utils";
 import { useState } from "react";
 import { useVehicleMakes } from "../../hooks/useVehicleMakes";
-import { IVehicleModelType } from "../../Vehicle/types";
-import { useQuery } from "@tanstack/react-query";
-import { fetchVehicleModels } from "../../../api";
+import useVehicleModels from "../../hooks/useVehicleModels";
 
 const VehicleSelectBar = () => {
   const [year, setYear] = useState("");
@@ -13,25 +11,8 @@ const VehicleSelectBar = () => {
   const [model, setModel] = useState("");
   const [engine, setEngine] = useState("");
 
-  const { data, status } = useVehicleMakes(year);
-  const vehicleMakes = processVehicleData(
-    data,
-    (item) => item.MakeId,
-    (item) => item.MakeName
-  );
-
-  const { data: vehicleModels, status: modelStatus } = useQuery<
-    IVehicleModelType[]
-  >({
-    queryKey: ["vehicleModels", make],
-    queryFn: () => fetchVehicleModels(make),
-    enabled: !!make,
-  });
-  const models = processVehicleData(
-    vehicleModels,
-    (item) => item.Model_ID,
-    (item) => item.Model_Name
-  );
+  const { makes, status } = useVehicleMakes(year);
+  const { models, status: modelStatus } = useVehicleModels(make);
 
   return (
     <VehicleSelectBarStyled>
@@ -45,7 +26,7 @@ const VehicleSelectBar = () => {
       <Select
         active={year !== ""}
         placeholder="2 | Make"
-        options={status === "success" ? vehicleMakes : []}
+        options={status === "success" ? makes : []}
         value={make}
         onChange={(e) => setMake(e.target.value)}
       />
