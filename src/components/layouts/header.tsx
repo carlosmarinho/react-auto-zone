@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Logo from "../assets/images/az-logo-full.svg";
-import SignIn from "../assets/images/signin.svg";
+import Logo from "../../assets/images/az-logo-full.svg";
+import SignIn from "../../assets/images/signin.svg";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -24,7 +24,6 @@ const Header = () => {
         <img src={SignIn} alt="User Login" />
         <span>Sign IN</span>
       </LoginIconArea>
-      {/* other header content */}
     </StyledHeader>
   );
 };
