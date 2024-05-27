@@ -6,7 +6,6 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
 `;
 
 const LoginIconArea = styled.div`

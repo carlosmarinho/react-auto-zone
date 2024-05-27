@@ -8,20 +8,19 @@ interface LayoutProps {
 }
 
 const Main = styled.main`
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "150px",
+  margin: 40px 32px;
 `;
 
 const Title = styled.h2`
-  textalign: "center";
+  text-align: center;
+  margin-bottom: 10px;
 `;
 
 const StyledDivider = styled.hr`
   border: none;
   height: 1px;
   background: #ddd;
-  margin: 20px 0;
+  margin-bottom: 50px;
 `;
 
 const Layout: FC<LayoutProps> = ({ children, title }) => {
@@ -31,7 +30,7 @@ const Layout: FC<LayoutProps> = ({ children, title }) => {
       <Main>
         <Title>{title}</Title>
         <StyledDivider />
-        <div style={{ marginTop: "20px" }}>{children}</div>
+        <div>{children}</div>
       </Main>
     </div>
   );
