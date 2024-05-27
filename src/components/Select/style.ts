@@ -4,6 +4,8 @@ export const StyledSelect = styled.select<{ active?: boolean }>`
   padding: 8px;
   font-size: 16px;
   border: 1px solid #000;
+  border-bottom: ${(props) =>
+    props.active ? "2px solid #f26100" : "1px solid #000"};
   border-bottom-color: ${(props) => (props.active ? "#f26100" : "#000")};
   border-radius: 5px;
   background-color: ${(props) => (props.active ? "#fff" : "#f2f2f2")};
