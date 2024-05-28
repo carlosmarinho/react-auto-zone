@@ -51,8 +51,13 @@ describe("VehicleSelectBar", () => {
     expect(yearSelect).toHaveValue(mockYear);
 
     const makeSelect = screen.getByRole("combobox", { name: /select make/i });
-    const options = await within(makeSelect).findByText("Toyota");
 
-    console.log("\n\n***\n options: ", options, "\n***\n");
+    await Promise.all(
+      makes.map(async (make) => {
+        expect(
+          await within(makeSelect).findByText(make.MakeName)
+        ).toBeInTheDocument();
+      })
+    );
   });
 });

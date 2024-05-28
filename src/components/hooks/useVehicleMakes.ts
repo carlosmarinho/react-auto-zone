@@ -10,8 +10,6 @@ export const useVehicleMakes = (year: string) => {
     enabled: !!year,
   });
 
-  console.log("\n\n***\n vehcicleMakes: ", vehicleMakes, "\n***\n");
-
   const makes = useMemo(
     () =>
       vehicleMakes
