@@ -60,4 +60,9 @@ describe("VehicleSelectBar", () => {
       })
     );
   });
+
+  /**@todo implement this test */
+  it("should load the select model with the data models that was loaded from api after selecting one make", async () => {});
+
+  /**@todo implement test for engine */
 });
