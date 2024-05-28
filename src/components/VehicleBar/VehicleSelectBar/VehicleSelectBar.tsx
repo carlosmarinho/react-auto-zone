@@ -12,6 +12,9 @@ const VehicleSelectBar = () => {
   const [engine, setEngine] = useState("");
 
   const { makes, status } = useVehicleMakes(year);
+
+  console.log("\n\n***\n makes: ", makes, status, "\n***\n");
+
   const { models, status: modelStatus } = useVehicleModels(make);
 
   return (
